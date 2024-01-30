@@ -1,30 +1,31 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-export default function Login() {
+export default function Register() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("")
     const router = useNavigate();
-    async function login() {
+    async function register() {
         try {
-            const res = await axios.post("http://202.29.230.197:30120/login", {
-                identifier: username,
-                password: password
+            await axios.post("http://202.29.230.197:30120/register", {
+                username: username,
+                password: password,
+                email: email
             }).then((res) => {
                 if(res.status===200){
-                console.log(res.data['token'])
-                localStorage.setItem("token", res.data['token'])
+                console.log(res.data)
                 router("/success");}
                 else{
                     console.log("error")
                 }
             })
         } catch (err) {
-            console.log(err);
+            console.log("hee");
         }
     }
     return (
-
+       
             <div>
                 <input
                     className="m-3 rounded"
@@ -38,18 +39,24 @@ export default function Login() {
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <input
+                    className="m-3 rounded"
+                    type="email"  // Change to password type for better security
+                    placeholder="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
                 <button
                     className="bg-black text-red-600"
-                    onClick={login}
+                    onClick={register}
                 >
-                    Click me
+                    Click me 
                 </button>
-                <button className="bg-black text-blue-600 "
-                onClick={() => router("/register")}
+                <button className="bg-black text-red-600"
+                onClick={() => router("/login")}
                 >
-                    register
+                    login
                 </button>
             </div>
-
+   
     );
 }

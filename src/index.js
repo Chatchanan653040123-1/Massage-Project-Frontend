@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './components/Login';
 import Success from './components/Success';
+import Register from './components/Register';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 const router = createBrowserRouter([{
   path: '/',
@@ -15,6 +16,9 @@ const router = createBrowserRouter([{
 },{
   path: '/success',
   element: <Success />,
+},{
+  path: '/register',
+  element: <Register />,
 }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
